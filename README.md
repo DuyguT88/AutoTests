@@ -1,9 +1,9 @@
 a. How to run the tests locally;
-- Go project directory on the command prompt of your computer and run the following command which runs test suites parallel:
+- Go local project directory on the command prompt of your computer and run the following command which runs test suites parallel:
 "pabot -d ./TestResults -x result.xml ./TestSuites"
 
 b. How to run the test in a CI/CD pipeline;
-- The tests code is pushed by Git to AzureDevOps git repository:
+- I use AzureDevOps as CI/CD environment and project repository. The tests code is pushed by Git to AzureDevOps git repository:
 https://dev.azure.com/duygulu-05/_git/AutoTestsInterviewProject
 - The Azure pipeline is created and configured for this project as well (./azure-pipelines.yml).
 The project pipelines are in: https://dev.azure.com/duygulu-05/AutoTestsInterviewProject/_build?definitionId=2
@@ -59,8 +59,12 @@ For example; the meaning of invalid data is not clear for the endpoints. Also, T
 endpoints but different purposes, the Id for what should be clarified.
 - I can check the report properties of Calliope.pro app if any feature I can add for better reporting.
 
-NOTES ABOUT THE FOUND ISSUES WHEN TESTING API:
+# NOTES:
+The project is added Github as well: https://github.com/DuyguT88/AutoTests
+
+# ABOUT THE FOUND ISSUES WHEN TESTING API:
 - User login and logout should not be GET api request, it should be POST api request. 
 - A token should be needed in the header of user login and logout endpoints (also other POST and PUT api requests).
 However it is not mentioned in api documentation.
-- The auto-test failures in test result report are bugs of api software.
+- The auto-test failures in test result report are bugs of the api software.
+(robot framework test results are committed https://github.com/DuyguT88/AutoTests/tree/main/TestResults/).
