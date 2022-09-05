@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20220905 14:27:26.552" rpa="false" schemaversion="3">
+<suite id="s1" name="TestSuites" source="C:\PythonInterviewProject\TestSuites">
+<suite id="s1-s1" name="API Tests" source="C:\PythonInterviewProject\TestSuites\API_Tests">
+<suite id="s1-s1-s1" name="TS003 API Store" source="C:\PythonInterviewProject\TestSuites\API_Tests\TS003_API_Store.robot">
+<test id="s1-s1-s1-t1" name="API_TS003_Test_1: Request an order" line="13">
+<kw name="Given Get reference json" library="Validate_json">
+<var>${add_order}</var>
+<arg>reference_schema_path=${GLOBAL_SCHEMA_SEND_CREATE_ORDER}</arg>
+<msg timestamp="20220905 14:27:26.718" level="INFO">{'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934Z', 'status': 'placed', 'complete': True}</msg>
+<msg timestamp="20220905 14:27:26.718" level="INFO">${add_order} = {'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934Z', 'status': 'placed', 'complete': True}</msg>
+<status status="PASS" starttime="20220905 14:27:26.717" endtime="20220905 14:27:26.718"/>
+</kw>
+<kw name="And Set Global Variable" library="BuiltIn">
+<arg>${add_order}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220905 14:27:26.719" level="INFO">${add_order} = {'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934Z', 'status': 'placed', 'complete': True}</msg>
+<status status="PASS" starttime="20220905 14:27:26.718" endtime="20220905 14:27:26.719"/>
+</kw>
+<kw name="When POST" library="RequestsLibrary">
+<var>${response_body}</var>
+<arg>url=${API_URL}/store/order</arg>
+<arg>json=${add_order}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220905 14:27:27.135" level="INFO">POST Request : url=https://petstore.swagger.io/v2/store/order 
+ path_url=/v2/store/order 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '115', 'Content-Type': 'application/json'} 
+ body=b'{"id": 5, "petId": 15, "quantity": 2, "shipDate": "2022-09-02T15:26:39.934Z", "status": "placed", "complete": true}' 
+ </msg>
+<msg timestamp="20220905 14:27:27.136" level="INFO">POST Response : url=https://petstore.swagger.io/v2/store/order 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":5,"petId":15,"quantity":2,"shipDate":"2022-09-02T15:26:39.934+0000","status":"placed","complete":true} 
+ </msg>
+<msg timestamp="20220905 14:27:27.136" level="INFO">${response_body} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:26.719" endtime="20220905 14:27:27.136"/>
+</kw>
+<kw name="And Validate the response schema with reference schema" library="DataChecker">
+<arg>input=${response_body.json()}</arg>
+<arg>ref_path=${GLOBAL_SCHEMA_RESPONSE_CREATE_ORDER}</arg>
+<kw name="Get Reference Json" library="Validate_json">
+<var>${ref}</var>
+<arg>reference_schema_path=${ref_path}</arg>
+<msg timestamp="20220905 14:27:27.139" level="INFO">{'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934+0000', 'status': 'placed', 'complete': True}</msg>
+<msg timestamp="20220905 14:27:27.139" level="INFO">${ref} = {'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934+0000', 'status': 'placed', 'complete': True}</msg>
+<status status="PASS" starttime="20220905 14:27:27.138" endtime="20220905 14:27:27.139"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${input}</arg>
+<arg>${ref}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:27.139" endtime="20220905 14:27:27.139"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.137" endtime="20220905 14:27:27.140"/>
+</kw>
+<tag>API</tag>
+<tag>API_STORE</tag>
+<status status="PASS" starttime="20220905 14:27:26.711" endtime="20220905 14:27:27.140"/>
+</test>
+<test id="s1-s1-s1-t2" name="API_TS003_Test_2: Get the order from order id" line="19">
+<kw name="Given Get From Dictionary" library="Collections">
+<var>${orderId}</var>
+<arg>${add_order}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20220905 14:27:27.141" level="INFO">${orderId} = 5</msg>
+<status status="PASS" starttime="20220905 14:27:27.141" endtime="20220905 14:27:27.141"/>
+</kw>
+<kw name="And Set Global Variable" library="BuiltIn">
+<arg>${orderId}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220905 14:27:27.142" level="INFO">${orderId} = 5</msg>
+<status status="PASS" starttime="20220905 14:27:27.141" endtime="20220905 14:27:27.142"/>
+</kw>
+<kw name="When GET" library="RequestsLibrary">
+<var>${get_response}</var>
+<arg>url=${API_URL}/store/order/${orderId}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:27.552" level="INFO">GET Request : url=https://petstore.swagger.io/v2/store/order/5 
+ path_url=/v2/store/order/5 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:27.552" level="INFO">GET Response : url=https://petstore.swagger.io/v2/store/order/5 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":5,"petId":15,"quantity":2,"shipDate":"2022-09-02T15:26:39.934+0000","status":"placed","complete":true} 
+ </msg>
+<msg timestamp="20220905 14:27:27.552" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:27.142" endtime="20220905 14:27:27.552"/>
+</kw>
+<kw name="And Validate the response schema with reference schema" library="DataChecker">
+<arg>input=${get_response.json()}</arg>
+<arg>ref_path=${GLOBAL_SCHEMA_RESPONSE_CREATE_ORDER}</arg>
+<kw name="Get Reference Json" library="Validate_json">
+<var>${ref}</var>
+<arg>reference_schema_path=${ref_path}</arg>
+<msg timestamp="20220905 14:27:27.555" level="INFO">{'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934+0000', 'status': 'placed', 'complete': True}</msg>
+<msg timestamp="20220905 14:27:27.555" level="INFO">${ref} = {'id': 5, 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934+0000', 'status': 'placed', 'complete': True}</msg>
+<status status="PASS" starttime="20220905 14:27:27.554" endtime="20220905 14:27:27.555"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${input}</arg>
+<arg>${ref}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:27.555" endtime="20220905 14:27:27.556"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.552" endtime="20220905 14:27:27.556"/>
+</kw>
+<tag>API</tag>
+<tag>API_STORE</tag>
+<status status="PASS" starttime="20220905 14:27:27.140" endtime="20220905 14:27:27.556"/>
+</test>
+<test id="s1-s1-s1-t3" name=" API_TS003_Test_3: Delete the order" line="25">
+<kw name="When DELETE" library="RequestsLibrary">
+<var>${delete_response}</var>
+<arg>url=${API_URL}/store/order/${orderId}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request.</doc>
+<msg timestamp="20220905 14:27:27.981" level="INFO">DELETE Request : url=https://petstore.swagger.io/v2/store/order/5 
+ path_url=/v2/store/order/5 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:27.981" level="INFO">DELETE Response : url=https://petstore.swagger.io/v2/store/order/5 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"5"} 
+ </msg>
+<msg timestamp="20220905 14:27:27.981" level="INFO">${delete_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:27.557" endtime="20220905 14:27:27.981"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${delete_response.json()}[type]</arg>
+<arg>actual_value=unknown</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_value}</arg>
+<arg>${actual_value}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:27.983" endtime="20220905 14:27:27.983"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.981" endtime="20220905 14:27:27.984"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>expected_value=${delete_response.json()}[message]</arg>
+<arg>actual_value=${orderId}</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_value}</arg>
+<arg>${actual_value}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220905 14:27:27.986" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:27.985" endtime="20220905 14:27:27.986"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.984" endtime="20220905 14:27:27.986"/>
+</kw>
+<tag>API</tag>
+<tag>API_STORE</tag>
+<status status="PASS" starttime="20220905 14:27:27.557" endtime="20220905 14:27:27.986"/>
+</test>
+<test id="s1-s1-s1-t4" name="API_TS003_Test_4: Get with non-existed orderId (Negative Test)" line="31">
+<kw name="When GET" library="RequestsLibrary">
+<var>${response}</var>
+<arg>url=${API_URL}/store/order/${invalid_orderId}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:28.430" level="INFO">GET Request : url=https://petstore.swagger.io/v2/store/order/15 
+ path_url=/v2/store/order/15 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:28.431" level="INFO">GET Response : url=https://petstore.swagger.io/v2/store/order/15 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:29 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":15,"petId":15,"quantity":2,"shipDate":"2022-09-02T15:26:39.934+0000","status":"placed","complete":true} 
+ </msg>
+<msg timestamp="20220905 14:27:28.431" level="FAIL">Url: https://petstore.swagger.io/v2/store/order/15 Expected status: 200 != 400</msg>
+<status status="FAIL" starttime="20220905 14:27:27.987" endtime="20220905 14:27:28.433"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${response.json()}[type]</arg>
+<arg>actual_value=error</arg>
+<status status="NOT RUN" starttime="20220905 14:27:28.433" endtime="20220905 14:27:28.433"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>expected_value=${response.json()}[message]</arg>
+<arg>actual_value=Invalid ID supplied</arg>
+<status status="NOT RUN" starttime="20220905 14:27:28.434" endtime="20220905 14:27:28.434"/>
+</kw>
+<tag>API</tag>
+<tag>API_STORE</tag>
+<status status="FAIL" starttime="20220905 14:27:27.987" endtime="20220905 14:27:28.434">Url: https://petstore.swagger.io/v2/store/order/15 Expected status: 200 != 400</status>
+</test>
+<test id="s1-s1-s1-t5" name="API_TS004_Test_5: Add an order with invalid order Id (Negative test)" line="36">
+<kw name="Given Set To Dictionary" library="Collections">
+<arg>${add_order}</arg>
+<arg>id=${invalid_orderId}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220905 14:27:28.435" endtime="20220905 14:27:28.436"/>
+</kw>
+<kw name="When POST" library="RequestsLibrary">
+<var>${response_body}</var>
+<arg>url=${API_URL}/store/order</arg>
+<arg>json=${add_order}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220905 14:27:28.858" level="INFO">POST Request : url=https://petstore.swagger.io/v2/store/order 
+ path_url=/v2/store/order 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '118', 'Content-Type': 'application/json'} 
+ body=b'{"id": "15", "petId": 15, "quantity": 2, "shipDate": "2022-09-02T15:26:39.934Z", "status": "placed", "complete": true}' 
+ </msg>
+<msg timestamp="20220905 14:27:28.858" level="INFO">POST Response : url=https://petstore.swagger.io/v2/store/order 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:29 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":15,"petId":15,"quantity":2,"shipDate":"2022-09-02T15:26:39.934+0000","status":"placed","complete":true} 
+ </msg>
+<msg timestamp="20220905 14:27:28.858" level="FAIL">Url: https://petstore.swagger.io/v2/store/order Expected status: 200 != 400</msg>
+<status status="FAIL" starttime="20220905 14:27:28.436" endtime="20220905 14:27:28.858"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${response_body.json()}[type]</arg>
+<arg>actual_value=error</arg>
+<status status="NOT RUN" starttime="20220905 14:27:28.859" endtime="20220905 14:27:28.860"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>expected_value=${response_body.json()}[message]</arg>
+<arg>actual_value=Invalid Order</arg>
+<status status="NOT RUN" starttime="20220905 14:27:28.860" endtime="20220905 14:27:28.860"/>
+</kw>
+<tag>API</tag>
+<tag>API_STORE</tag>
+<status status="FAIL" starttime="20220905 14:27:28.435" endtime="20220905 14:27:28.860">Url: https://petstore.swagger.io/v2/store/order Expected status: 200 != 400</status>
+</test>
+<status status="FAIL" starttime="20220905 14:27:26.585" endtime="20220905 14:27:28.861"/>
+</suite>
+<status status="FAIL" starttime="20220905 14:27:26.582" endtime="20220905 14:27:28.862"/>
+</suite>
+<status status="FAIL" starttime="20220905 14:27:26.563" endtime="20220905 14:27:28.863"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="2" skip="0">API</stat>
+<stat pass="3" fail="2" skip="0">API_STORE</stat>
+</tag>
+<suite>
+<stat pass="3" fail="2" skip="0" id="s1" name="TestSuites">TestSuites</stat>
+<stat pass="3" fail="2" skip="0" id="s1-s1" name="API Tests">TestSuites.API Tests</stat>
+<stat pass="3" fail="2" skip="0" id="s1-s1-s1" name="TS003 API Store">TestSuites.API Tests.TS003 API Store</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

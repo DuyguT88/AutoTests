@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestSuites" tests="22" errors="0" failures="7" skipped="0" time="12.927" timestamp="2022-09-05T14:27:26.169000">
+<testsuite name="API Tests" tests="19" errors="0" failures="7" skipped="0" time="8.081" timestamp="2022-09-05T14:27:26.582000">
+<testsuite name="TS001 API User" tests="7" errors="0" failures="2" skipped="0" time="8.072" timestamp="2022-09-05T14:27:26.589000">
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_1: Add an user" time="1.233">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_2: Update the lastname and phone of the user" time="1.340">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_3: Get the user from username" time="0.860">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name=" API_TS001_Test_4: Delete the user" time="1.267">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_5: Add an user without login (Negative test)" time="0.814">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_6: Try to update invalid user (Negative test)" time="1.193">
+<failure message="Url: https://petstore.swagger.io/v2/user/***invalidName*** Expected status: 200 != 400" type="AssertionError"/>
+</testcase>
+<testcase classname="TestSuites.API Tests.TS001 API User" name="API_TS001_Test_7: Try to update non-existed user (Negative test)" time="1.227">
+<failure message="Url: https://petstore.swagger.io/v2/user/Henry Expected status: 200 != 404" type="AssertionError"/>
+</testcase>
+</testsuite>
+<testsuite name="TS002 API Pet" tests="7" errors="0" failures="3" skipped="0" time="3.085" timestamp="2022-09-05T14:27:26.614000">
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_1: Add a pet" time="0.411">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_2: Update the pet image" time="0.449">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_3: Get the pet from id" time="0.395">
+<failure message="{'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'} != {'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//lovely_dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'}" type="AssertionError"/>
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_4: Delete the pet" time="0.403">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_6: Add a ped non-invalid keys and values (Negative Test)" time="0.458">
+<failure message="Url: https://petstore.swagger.io/v2/pet Expected status: 200 != 405" type="AssertionError"/>
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_7: Get with non-existed pedId (Negative Test)" time="0.409">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS002 API Pet" name="API_TS002_Test_8: Not possible to add a pet with undefined status different than available,pending,sold (Negative Test)" time="0.438">
+<failure message="Url: https://petstore.swagger.io/v2/pet Expected status: 200 != 405" type="AssertionError"/>
+</testcase>
+</testsuite>
+<testsuite name="TS003 API Store" tests="5" errors="0" failures="2" skipped="0" time="2.276" timestamp="2022-09-05T14:27:26.585000">
+<testcase classname="TestSuites.API Tests.TS003 API Store" name="API_TS003_Test_1: Request an order" time="0.429">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS003 API Store" name="API_TS003_Test_2: Get the order from order id" time="0.416">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS003 API Store" name=" API_TS003_Test_3: Delete the order" time="0.429">
+</testcase>
+<testcase classname="TestSuites.API Tests.TS003 API Store" name="API_TS003_Test_4: Get with non-existed orderId (Negative Test)" time="0.447">
+<failure message="Url: https://petstore.swagger.io/v2/store/order/15 Expected status: 200 != 400" type="AssertionError"/>
+</testcase>
+<testcase classname="TestSuites.API Tests.TS003 API Store" name="API_TS004_Test_5: Add an order with invalid order Id (Negative test)" time="0.425">
+<failure message="Url: https://petstore.swagger.io/v2/store/order Expected status: 200 != 400" type="AssertionError"/>
+</testcase>
+</testsuite>
+</testsuite>
+<testsuite name="UI Tests" tests="3" errors="0" failures="0" skipped="0" time="12.167" timestamp="2022-09-05T14:27:26.589000">
+<testsuite name="TS001 UI Click" tests="1" errors="0" failures="0" skipped="0" time="8.248" timestamp="2022-09-05T14:27:26.592000">
+<testcase classname="TestSuites.UI Tests.TS001 UI Click" name="UI_TS001_Test_1: Check if the color of button before and after the click" time="8.033">
+</testcase>
+</testsuite>
+<testsuite name="TS002 UI TextVerify" tests="1" errors="0" failures="0" skipped="0" time="6.304" timestamp="2022-09-05T14:27:26.609000">
+<testcase classname="TestSuites.UI Tests.TS002 UI TextVerify" name="UI_TS002_Test_1: Check if 'Welcome UserName!' text field is available" time="6.090">
+</testcase>
+</testsuite>
+<testsuite name="TS003 UI Visibility" tests="1" errors="0" failures="0" skipped="0" time="12.142" timestamp="2022-09-05T14:27:26.613000">
+<testcase classname="TestSuites.UI Tests.TS003 UI Visibility" name="UI_TS003_Test_1: Check if all buttons visible after clicking on Hide button" time="11.916">
+</testcase>
+</testsuite>
+</testsuite>
+<properties>
+<property name="Documentation" value="[https://pabot.org/?ref=log|Pabot] result from 6 executions."/>
+</properties>
+</testsuite>

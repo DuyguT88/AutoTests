@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20220905 14:27:26.558" rpa="false" schemaversion="3">
+<suite id="s1" name="TestSuites" source="C:\PythonInterviewProject\TestSuites">
+<suite id="s1-s1" name="API Tests" source="C:\PythonInterviewProject\TestSuites\API_Tests">
+<suite id="s1-s1-s1" name="TS001 API User" source="C:\PythonInterviewProject\TestSuites\API_Tests\TS001_API_User.robot">
+<test id="s1-s1-s1-t1" name="API_TS001_Test_1: Add an user" line="22">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:27.134" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:27.134" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:26.727" endtime="20220905 14:27:27.135"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:26.726" endtime="20220905 14:27:27.135"/>
+</kw>
+<kw name="Given User Logins" library="UserKeywords">
+<arg>user=${login_user}</arg>
+<arg>passwd=${login_passwd}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{authorization}</var>
+<arg>username=${user}</arg>
+<arg>password=${passwd}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220905 14:27:27.137" level="INFO">&amp;{authorization} = { username=adminUser | password=986/*#^$&amp; }</msg>
+<status status="PASS" starttime="20220905 14:27:27.136" endtime="20220905 14:27:27.137"/>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<var>${login_response}</var>
+<arg>url=${API_URL}/user/login</arg>
+<arg>json=${authorization}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:27.531" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/login 
+ path_url=/v2/user/login 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/json'} 
+ body=b'{"username": "adminUser", "password": "986/*#^$&amp;"}' 
+ </msg>
+<msg timestamp="20220905 14:27:27.531" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'X-Expires-After': 'Mon Sep 05 13:27:28 UTC 2022', 'X-Rate-Limit': '5000', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"logged in user session:1662380848474"} 
+ </msg>
+<msg timestamp="20220905 14:27:27.531" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:27.137" endtime="20220905 14:27:27.531"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${user}&quot; != &quot;${EMPTY}&quot; and &quot;${passwd}&quot; != &quot;${EMPTY}&quot;">
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${login_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220905 14:27:27.536" endtime="20220905 14:27:27.536"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.535" endtime="20220905 14:27:27.536"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" library="BuiltIn">
+<arg>message=Invalid login</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:27.537" endtime="20220905 14:27:27.537"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:27.536" endtime="20220905 14:27:27.537"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:27.532" endtime="20220905 14:27:27.537"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:27.135" endtime="20220905 14:27:27.537"/>
+</kw>
+<kw name="And Get reference json" library="Validate_json">
+<var>${create_req_body}</var>
+<arg>reference_schema_path=${GLOBAL_SCHEMA_SEND_ADD_USER}</arg>
+<msg timestamp="20220905 14:27:27.538" level="INFO">{'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Dark', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '480462046', 'userStatus': 6}</msg>
+<msg timestamp="20220905 14:27:27.538" level="INFO">${create_req_body} = {'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Dark', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '480462046', 'userStatus': 6}</msg>
+<status status="PASS" starttime="20220905 14:27:27.537" endtime="20220905 14:27:27.538"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${create_req_body}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220905 14:27:27.539" level="INFO">${create_req_body} = {'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Dark', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '480462046', 'userStatus': 6}</msg>
+<status status="PASS" starttime="20220905 14:27:27.539" endtime="20220905 14:27:27.539"/>
+</kw>
+<kw name="When POST" library="RequestsLibrary">
+<var>${post_response}</var>
+<arg>url=${API_URL}/user</arg>
+<arg>json=${create_req_body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220905 14:27:27.953" level="INFO">POST Request : url=https://petstore.swagger.io/v2/user 
+ path_url=/v2/user 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '164', 'Content-Type': 'application/json'} 
+ body=b'{"id": 1553, "username": "Leo", "firstName": "Daniel", "lastName": "Dark", "email": "test@hotmail.com", "password": "f56%&amp;*", "phone": "480462046", "userStatus": 6}' 
+ </msg>
+<msg timestamp="20220905 14:27:27.953" level="INFO">POST Response : url=https://petstore.swagger.io/v2/user 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:28 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"1553"} 
+ </msg>
+<msg timestamp="20220905 14:27:27.953" level="INFO">${post_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:27.540" endtime="20220905 14:27:27.953"/>
+</kw>
+<kw name="Then Validate the response schema with reference schema" library="DataChecker">
+<arg>input=${post_response.json()}</arg>
+<arg>ref_path=${GLOBAL_SCHEMA_RESP_CREATE_USER}</arg>
+<kw name="Get Reference Json" library="Validate_json">
+<var>${ref}</var>
+<arg>reference_schema_path=${ref_path}</arg>
+<msg timestamp="20220905 14:27:27.956" level="INFO">{'code': 200, 'type': 'unknown', 'message': '1553'}</msg>
+<msg timestamp="20220905 14:27:27.956" level="INFO">${ref} = {'code': 200, 'type': 'unknown', 'message': '1553'}</msg>
+<status status="PASS" starttime="20220905 14:27:27.955" endtime="20220905 14:27:27.956"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${input}</arg>
+<arg>${ref}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:27.957" endtime="20220905 14:27:27.957"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.953" endtime="20220905 14:27:27.958"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="PASS" starttime="20220905 14:27:26.725" endtime="20220905 14:27:27.958"/>
+</test>
+<test id="s1-s1-s1-t2" name="API_TS001_Test_2: Update the lastname and phone of the user" line="29">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:28.396" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:28.396" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:29 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:27.960" endtime="20220905 14:27:28.396"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:27.959" endtime="20220905 14:27:28.396"/>
+</kw>
+<kw name="Given User Logins" library="UserKeywords">
+<arg>user=${login_user}</arg>
+<arg>passwd=${login_passwd}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{authorization}</var>
+<arg>username=${user}</arg>
+<arg>password=${passwd}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220905 14:27:28.398" level="INFO">&amp;{authorization} = { username=adminUser | password=986/*#^$&amp; }</msg>
+<status status="PASS" starttime="20220905 14:27:28.397" endtime="20220905 14:27:28.399"/>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<var>${login_response}</var>
+<arg>url=${API_URL}/user/login</arg>
+<arg>json=${authorization}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:28.858" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/login 
+ path_url=/v2/user/login 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/json'} 
+ body=b'{"username": "adminUser", "password": "986/*#^$&amp;"}' 
+ </msg>
+<msg timestamp="20220905 14:27:28.858" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:29 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'X-Expires-After': 'Mon Sep 05 13:27:29 UTC 2022', 'X-Rate-Limit': '5000', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"logged in user session:1662380849795"} 
+ </msg>
+<msg timestamp="20220905 14:27:28.859" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:28.399" endtime="20220905 14:27:28.859"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${user}&quot; != &quot;${EMPTY}&quot; and &quot;${passwd}&quot; != &quot;${EMPTY}&quot;">
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${login_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220905 14:27:28.861" endtime="20220905 14:27:28.861"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:28.860" endtime="20220905 14:27:28.861"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" library="BuiltIn">
+<arg>message=Invalid login</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:28.862" endtime="20220905 14:27:28.862"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:28.862" endtime="20220905 14:27:28.862"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:28.859" endtime="20220905 14:27:28.863"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:28.396" endtime="20220905 14:27:28.863"/>
+</kw>
+<kw name="And Get From Dictionary" library="Collections">
+<var>${username}</var>
+<arg>${create_req_body}</arg>
+<arg>key=username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20220905 14:27:28.863" level="INFO">${username} = Leo</msg>
+<status status="PASS" starttime="20220905 14:27:28.863" endtime="20220905 14:27:28.864"/>
+</kw>
+<kw name="And Set Global Variable" library="BuiltIn">
+<arg>${username}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220905 14:27:28.864" level="INFO">${username} = Leo</msg>
+<status status="PASS" starttime="20220905 14:27:28.864" endtime="20220905 14:27:28.864"/>
+</kw>
+<kw name="And Set To Dictionary" library="Collections">
+<arg>dictionary=${create_req_body}</arg>
+<arg>lastName=${new_lastName}</arg>
+<arg>phone=${new_phone}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220905 14:27:28.865" endtime="20220905 14:27:28.865"/>
+</kw>
+<kw name="When PUT" library="RequestsLibrary">
+<var>${put_response}</var>
+<arg>url=${API_URL}/user/${username}</arg>
+<arg>json=${create_req_body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a PUT request.</doc>
+<msg timestamp="20220905 14:27:29.294" level="INFO">PUT Request : url=https://petstore.swagger.io/v2/user/Leo 
+ path_url=/v2/user/Leo 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '163', 'Content-Type': 'application/json'} 
+ body=b'{"id": 1553, "username": "Leo", "firstName": "Daniel", "lastName": "Brown", "email": "test@hotmail.com", "password": "f56%&amp;*", "phone": "1876865", "userStatus": 6}' 
+ </msg>
+<msg timestamp="20220905 14:27:29.294" level="INFO">PUT Response : url=https://petstore.swagger.io/v2/user/Leo 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:30 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"1553"} 
+ </msg>
+<msg timestamp="20220905 14:27:29.294" level="INFO">${put_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:28.866" endtime="20220905 14:27:29.294"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${put_response.json()}[type]</arg>
+<arg>actual_value=unknown</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_value}</arg>
+<arg>${actual_value}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:29.296" endtime="20220905 14:27:29.297"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:29.294" endtime="20220905 14:27:29.297"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="PASS" starttime="20220905 14:27:27.958" endtime="20220905 14:27:29.298"/>
+</test>
+<test id="s1-s1-s1-t3" name="API_TS001_Test_3: Get the user from username" line="37">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:29.713" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:29.713" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:30 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:29.300" endtime="20220905 14:27:29.713"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:29.299" endtime="20220905 14:27:29.713"/>
+</kw>
+<kw name="When GET" library="RequestsLibrary">
+<var>${get_response}</var>
+<arg>url=${API_URL}/user/${username}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:30.136" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/Leo 
+ path_url=/v2/user/Leo 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:30.136" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/Leo 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:31 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":1553,"username":"Leo","firstName":"Daniel","lastName":"Brown","email":"test@hotmail.com","password":"f56%&amp;*","phone":"1876865","userStatus":6} 
+ </msg>
+<msg timestamp="20220905 14:27:30.136" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:29.714" endtime="20220905 14:27:30.137"/>
+</kw>
+<kw name="When Validate the response schema with reference schema" library="DataChecker">
+<arg>input=${get_response.json()}</arg>
+<arg>ref_path=${GLOBAL_SCHEMA_RESP_GET_USER}</arg>
+<kw name="Get Reference Json" library="Validate_json">
+<var>${ref}</var>
+<arg>reference_schema_path=${ref_path}</arg>
+<msg timestamp="20220905 14:27:30.153" level="INFO">{'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Brown', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '1876865', 'userStatus': 6}</msg>
+<msg timestamp="20220905 14:27:30.153" level="INFO">${ref} = {'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Brown', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '1876865', 'userStatus': 6}</msg>
+<status status="PASS" starttime="20220905 14:27:30.150" endtime="20220905 14:27:30.153"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${input}</arg>
+<arg>${ref}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:30.154" endtime="20220905 14:27:30.157"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.137" endtime="20220905 14:27:30.157"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="PASS" starttime="20220905 14:27:29.298" endtime="20220905 14:27:30.158"/>
+</test>
+<test id="s1-s1-s1-t4" name=" API_TS001_Test_4: Delete the user" line="41">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:30.587" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:30.587" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:31 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:30.159" endtime="20220905 14:27:30.587"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.159" endtime="20220905 14:27:30.587"/>
+</kw>
+<kw name="Given User Logins" library="UserKeywords">
+<arg>user=${login_user}</arg>
+<arg>passwd=${login_passwd}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{authorization}</var>
+<arg>username=${user}</arg>
+<arg>password=${passwd}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220905 14:27:30.591" level="INFO">&amp;{authorization} = { username=adminUser | password=986/*#^$&amp; }</msg>
+<status status="PASS" starttime="20220905 14:27:30.590" endtime="20220905 14:27:30.591"/>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<var>${login_response}</var>
+<arg>url=${API_URL}/user/login</arg>
+<arg>json=${authorization}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:31.009" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/login 
+ path_url=/v2/user/login 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/json'} 
+ body=b'{"username": "adminUser", "password": "986/*#^$&amp;"}' 
+ </msg>
+<msg timestamp="20220905 14:27:31.009" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:31 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'X-Expires-After': 'Mon Sep 05 13:27:31 UTC 2022', 'X-Rate-Limit': '5000', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"logged in user session:1662380851950"} 
+ </msg>
+<msg timestamp="20220905 14:27:31.010" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:30.591" endtime="20220905 14:27:31.010"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${user}&quot; != &quot;${EMPTY}&quot; and &quot;${passwd}&quot; != &quot;${EMPTY}&quot;">
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${login_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220905 14:27:31.012" endtime="20220905 14:27:31.013"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.011" endtime="20220905 14:27:31.013"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" library="BuiltIn">
+<arg>message=Invalid login</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:31.014" endtime="20220905 14:27:31.014"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:31.013" endtime="20220905 14:27:31.014"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:31.010" endtime="20220905 14:27:31.014"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:30.589" endtime="20220905 14:27:31.014"/>
+</kw>
+<kw name="When DELETE" library="RequestsLibrary">
+<var>${delete_response}</var>
+<arg>url=${API_URL}/user/${username}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request.</doc>
+<msg timestamp="20220905 14:27:31.420" level="INFO">DELETE Request : url=https://petstore.swagger.io/v2/user/Leo 
+ path_url=/v2/user/Leo 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:31.420" level="INFO">DELETE Response : url=https://petstore.swagger.io/v2/user/Leo 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:32 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"Leo"} 
+ </msg>
+<msg timestamp="20220905 14:27:31.421" level="INFO">${delete_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:31.015" endtime="20220905 14:27:31.421"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${delete_response.json()}[type]</arg>
+<arg>actual_value=unknown</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_value}</arg>
+<arg>${actual_value}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:31.422" endtime="20220905 14:27:31.423"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.421" endtime="20220905 14:27:31.423"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>expected_value=${delete_response.json()}[message]</arg>
+<arg>actual_value=${username}</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_value}</arg>
+<arg>${actual_value}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:31.424" endtime="20220905 14:27:31.425"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.423" endtime="20220905 14:27:31.425"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="PASS" starttime="20220905 14:27:30.158" endtime="20220905 14:27:31.425"/>
+</test>
+<test id="s1-s1-s1-t5" name="API_TS001_Test_5: Add an user without login (Negative test)" line="48">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:31.818" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:31.818" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:32 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:31.426" endtime="20220905 14:27:31.818"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.426" endtime="20220905 14:27:31.819"/>
+</kw>
+<kw name="Given Get reference json" library="Validate_json">
+<var>${create_req_body}</var>
+<arg>reference_schema_path=${GLOBAL_SCHEMA_SEND_ADD_USER}</arg>
+<msg timestamp="20220905 14:27:31.820" level="INFO">{'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Dark', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '480462046', 'userStatus': 6}</msg>
+<msg timestamp="20220905 14:27:31.820" level="INFO">${create_req_body} = {'id': 1553, 'username': 'Leo', 'firstName': 'Daniel', 'lastName': 'Dark', 'email': 'test@hotmail.com', 'password': 'f56%&amp;*', 'phone': '480462046', 'userStatus': 6}</msg>
+<status status="PASS" starttime="20220905 14:27:31.819" endtime="20220905 14:27:31.820"/>
+</kw>
+<kw name="When POST" library="RequestsLibrary">
+<var>${post_response}</var>
+<arg>url=${API_URL}/user</arg>
+<arg>json=${create_req_body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220905 14:27:32.235" level="INFO">POST Request : url=https://petstore.swagger.io/v2/user 
+ path_url=/v2/user 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '164', 'Content-Type': 'application/json'} 
+ body=b'{"id": 1553, "username": "Leo", "firstName": "Daniel", "lastName": "Dark", "email": "test@hotmail.com", "password": "f56%&amp;*", "phone": "480462046", "userStatus": 6}' 
+ </msg>
+<msg timestamp="20220905 14:27:32.236" level="INFO">POST Response : url=https://petstore.swagger.io/v2/user 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:33 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"1553"} 
+ </msg>
+<msg timestamp="20220905 14:27:32.236" level="INFO">${post_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:31.820" endtime="20220905 14:27:32.236"/>
+</kw>
+<kw name="Then Run Keyword And Return Status" library="BuiltIn">
+<var>${failed}</var>
+<arg>Status should be</arg>
+<arg>status=200</arg>
+<arg>url=${post_response}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>status=200</arg>
+<arg>url=${post_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<msg timestamp="20220905 14:27:32.237" level="FAIL">InvalidResponse: url=&lt;Response [200]&gt;</msg>
+<status status="FAIL" starttime="20220905 14:27:32.236" endtime="20220905 14:27:32.238"/>
+</kw>
+<msg timestamp="20220905 14:27:32.238" level="INFO">${failed} = False</msg>
+<status status="PASS" starttime="20220905 14:27:32.236" endtime="20220905 14:27:32.238"/>
+</kw>
+<kw name="And Run Keyword If" library="BuiltIn">
+<arg>${failed}</arg>
+<arg>FAIL</arg>
+<arg>message=Status should not be 200 since user is not login</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20220905 14:27:32.239" endtime="20220905 14:27:32.239"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="PASS" starttime="20220905 14:27:31.425" endtime="20220905 14:27:32.239"/>
+</test>
+<test id="s1-s1-s1-t6" name="API_TS001_Test_6: Try to update invalid user (Negative test)" line="54">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:32.630" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:32.630" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:33 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:32.241" endtime="20220905 14:27:32.630"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:32.241" endtime="20220905 14:27:32.631"/>
+</kw>
+<kw name="Given User Logins" library="UserKeywords">
+<arg>user=${login_user}</arg>
+<arg>passwd=${login_passwd}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{authorization}</var>
+<arg>username=${user}</arg>
+<arg>password=${passwd}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220905 14:27:32.632" level="INFO">&amp;{authorization} = { username=adminUser | password=986/*#^$&amp; }</msg>
+<status status="PASS" starttime="20220905 14:27:32.632" endtime="20220905 14:27:32.632"/>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<var>${login_response}</var>
+<arg>url=${API_URL}/user/login</arg>
+<arg>json=${authorization}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:33.040" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/login 
+ path_url=/v2/user/login 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/json'} 
+ body=b'{"username": "adminUser", "password": "986/*#^$&amp;"}' 
+ </msg>
+<msg timestamp="20220905 14:27:33.040" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:33 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'X-Expires-After': 'Mon Sep 05 13:27:33 UTC 2022', 'X-Rate-Limit': '5000', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"logged in user session:1662380853983"} 
+ </msg>
+<msg timestamp="20220905 14:27:33.041" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:32.632" endtime="20220905 14:27:33.041"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${user}&quot; != &quot;${EMPTY}&quot; and &quot;${passwd}&quot; != &quot;${EMPTY}&quot;">
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${login_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220905 14:27:33.042" endtime="20220905 14:27:33.043"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:33.042" endtime="20220905 14:27:33.043"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" library="BuiltIn">
+<arg>message=Invalid login</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:33.043" endtime="20220905 14:27:33.043"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:33.043" endtime="20220905 14:27:33.043"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:33.041" endtime="20220905 14:27:33.043"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:32.631" endtime="20220905 14:27:33.043"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>dictionary=${create_req_body}</arg>
+<arg>password=${new_password}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220905 14:27:33.043" endtime="20220905 14:27:33.044"/>
+</kw>
+<kw name="When PUT" library="RequestsLibrary">
+<var>${invalid_response}</var>
+<arg>url=${API_URL}/user/${invalid_username}</arg>
+<arg>json=${create_req_body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a PUT request.</doc>
+<msg timestamp="20220905 14:27:33.431" level="INFO">PUT Request : url=https://petstore.swagger.io/v2/user/***invalidName*** 
+ path_url=/v2/user/***invalidName*** 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '166', 'Content-Type': 'application/json'} 
+ body=b'{"id": 1553, "username": "Leo", "firstName": "Daniel", "lastName": "Brown", "email": "test@hotmail.com", "password": "***#!@@$%", "phone": "1876865", "userStatus": 6}' 
+ </msg>
+<msg timestamp="20220905 14:27:33.431" level="INFO">PUT Response : url=https://petstore.swagger.io/v2/user/***invalidName*** 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:34 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"1553"} 
+ </msg>
+<msg timestamp="20220905 14:27:33.431" level="FAIL">Url: https://petstore.swagger.io/v2/user/***invalidName*** Expected status: 200 != 400</msg>
+<status status="FAIL" starttime="20220905 14:27:33.044" endtime="20220905 14:27:33.432"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>expected_value=${invalid_response.json()}[type]</arg>
+<arg>actual_value=error</arg>
+<status status="NOT RUN" starttime="20220905 14:27:33.432" endtime="20220905 14:27:33.433"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>expected_value=${invalid_response.json()}[message]</arg>
+<arg>actual_value=Invalid user supplied</arg>
+<status status="NOT RUN" starttime="20220905 14:27:33.433" endtime="20220905 14:27:33.433"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="FAIL" starttime="20220905 14:27:32.240" endtime="20220905 14:27:33.433">Url: https://petstore.swagger.io/v2/user/***invalidName*** Expected status: 200 != 400</status>
+</test>
+<test id="s1-s1-s1-t7" name="API_TS001_Test_7: Try to update non-existed user (Negative test)" line="61">
+<kw name="User Logout" library="UserKeywords" type="SETUP">
+<kw name="GET" library="RequestsLibrary">
+<arg>url=${API_URL}/user/logout</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:33.840" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/logout 
+ path_url=/v2/user/logout 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220905 14:27:33.840" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:34 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"ok"} 
+ </msg>
+<status status="PASS" starttime="20220905 14:27:33.434" endtime="20220905 14:27:33.840"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:33.434" endtime="20220905 14:27:33.840"/>
+</kw>
+<kw name="Given User Logins" library="UserKeywords">
+<arg>user=${login_user}</arg>
+<arg>passwd=${login_passwd}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{authorization}</var>
+<arg>username=${user}</arg>
+<arg>password=${passwd}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220905 14:27:33.842" level="INFO">&amp;{authorization} = { username=adminUser | password=986/*#^$&amp; }</msg>
+<status status="PASS" starttime="20220905 14:27:33.841" endtime="20220905 14:27:33.842"/>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<var>${login_response}</var>
+<arg>url=${API_URL}/user/login</arg>
+<arg>json=${authorization}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20220905 14:27:34.246" level="INFO">GET Request : url=https://petstore.swagger.io/v2/user/login 
+ path_url=/v2/user/login 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/json'} 
+ body=b'{"username": "adminUser", "password": "986/*#^$&amp;"}' 
+ </msg>
+<msg timestamp="20220905 14:27:34.247" level="INFO">GET Response : url=https://petstore.swagger.io/v2/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:35 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'X-Expires-After': 'Mon Sep 05 13:27:35 UTC 2022', 'X-Rate-Limit': '5000', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"logged in user session:1662380855189"} 
+ </msg>
+<msg timestamp="20220905 14:27:34.247" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:33.842" endtime="20220905 14:27:34.247"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${user}&quot; != &quot;${EMPTY}&quot; and &quot;${passwd}&quot; != &quot;${EMPTY}&quot;">
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${login_response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220905 14:27:34.248" endtime="20220905 14:27:34.249"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:34.248" endtime="20220905 14:27:34.249"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" library="BuiltIn">
+<arg>message=Invalid login</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:34.249" endtime="20220905 14:27:34.249"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:34.249" endtime="20220905 14:27:34.250"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:34.247" endtime="20220905 14:27:34.250"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:33.841" endtime="20220905 14:27:34.250"/>
+</kw>
+<kw name="And Set To Dictionary" library="Collections">
+<arg>dictionary=${create_req_body}</arg>
+<arg>password=${new_password}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220905 14:27:34.250" endtime="20220905 14:27:34.250"/>
+</kw>
+<kw name="When PUT" library="RequestsLibrary">
+<var>${nonExistedPut_response}</var>
+<arg>url=${API_URL}/user/${nonExisted_username}</arg>
+<arg>json=${create_req_body}</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a PUT request.</doc>
+<msg timestamp="20220905 14:27:34.658" level="INFO">PUT Request : url=https://petstore.swagger.io/v2/user/Henry 
+ path_url=/v2/user/Henry 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '166', 'Content-Type': 'application/json'} 
+ body=b'{"id": 1553, "username": "Leo", "firstName": "Daniel", "lastName": "Brown", "email": "test@hotmail.com", "password": "***#!@@$%", "phone": "1876865", "userStatus": 6}' 
+ </msg>
+<msg timestamp="20220905 14:27:34.659" level="INFO">PUT Response : url=https://petstore.swagger.io/v2/user/Henry 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 05 Sep 2022 12:27:35 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"1553"} 
+ </msg>
+<msg timestamp="20220905 14:27:34.659" level="FAIL">Url: https://petstore.swagger.io/v2/user/Henry Expected status: 200 != 404</msg>
+<status status="FAIL" starttime="20220905 14:27:34.251" endtime="20220905 14:27:34.659"/>
+</kw>
+<kw name="Then The response should have correct data" library="DataChecker">
+<arg>input=${nonExistedPut_response.json()}[type]</arg>
+<arg>actual_value=error</arg>
+<status status="NOT RUN" starttime="20220905 14:27:34.660" endtime="20220905 14:27:34.660"/>
+</kw>
+<kw name="And The response should have correct data" library="DataChecker">
+<arg>input=${nonExistedPut_response.json()}[message]</arg>
+<arg>actual_value=User not found</arg>
+<status status="NOT RUN" starttime="20220905 14:27:34.660" endtime="20220905 14:27:34.660"/>
+</kw>
+<tag>API</tag>
+<tag>API_USER</tag>
+<status status="FAIL" starttime="20220905 14:27:33.434" endtime="20220905 14:27:34.661">Url: https://petstore.swagger.io/v2/user/Henry Expected status: 200 != 404</status>
+</test>
+<status status="FAIL" starttime="20220905 14:27:26.589" endtime="20220905 14:27:34.661"/>
+</suite>
+<status status="FAIL" starttime="20220905 14:27:26.585" endtime="20220905 14:27:34.663"/>
+</suite>
+<status status="FAIL" starttime="20220905 14:27:26.568" endtime="20220905 14:27:34.664"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="5" fail="2" skip="0">API</stat>
+<stat pass="5" fail="2" skip="0">API_USER</stat>
+</tag>
+<suite>
+<stat pass="5" fail="2" skip="0" id="s1" name="TestSuites">TestSuites</stat>
+<stat pass="5" fail="2" skip="0" id="s1-s1" name="API Tests">TestSuites.API Tests</stat>
+<stat pass="5" fail="2" skip="0" id="s1-s1-s1" name="TS001 API User">TestSuites.API Tests.TS001 API User</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

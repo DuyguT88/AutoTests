@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20220905 14:27:26.584" rpa="false" schemaversion="3">
+<suite id="s1" name="TestSuites" source="C:\PythonInterviewProject\TestSuites">
+<suite id="s1-s1" name="UI Tests" source="C:\PythonInterviewProject\TestSuites\UI_Tests">
+<suite id="s1-s1-s1" name="TS003 UI Visibility" source="C:\PythonInterviewProject\TestSuites\UI_Tests\TS003_UI_Visibility.robot">
+<test id="s1-s1-s1-t1" name="UI_TS003_Test_1: Check if all buttons visible after clicking on Hide button" line="14">
+<kw name="Preconditions" type="SETUP">
+<kw name="Open the web page" library="Generic">
+<arg>url=${WEB_URL}</arg>
+<arg>browser=${BROWSER}</arg>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220905 14:27:26.842" level="INFO">Opening browser 'Chrome' to base url 'http://www.uitestingplayground.com/'.</msg>
+<status status="PASS" starttime="20220905 14:27:26.842" endtime="20220905 14:27:29.847"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20220905 14:27:29.847" endtime="20220905 14:27:30.066"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>text=UI Test Automation Playground</arg>
+<arg>timeout=30s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20220905 14:27:30.066" endtime="20220905 14:27:30.218"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:26.841" endtime="20220905 14:27:30.219"/>
+</kw>
+<kw name="Click on the scenario name" library="MainPage">
+<arg>hyperlink_name=Visibility</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[text()="${hyperlink_name}"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220905 14:27:30.222" level="INFO">Clicking element '//a[text()="Visibility"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:30.220" endtime="20220905 14:27:30.670"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.219" endtime="20220905 14:27:30.670"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:26.840" endtime="20220905 14:27:30.670"/>
+</kw>
+<kw name="Given The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Hide</arg>
+<arg>expectedColor=rgba(0, 123, 255, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:30.673" level="INFO">${element_xpath} = xpath=//button[text()="Hide"]</msg>
+<status status="PASS" starttime="20220905 14:27:30.672" endtime="20220905 14:27:30.673"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:30.674" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Hide"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:30.674" endtime="20220905 14:27:31.324"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:31.332" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="cbb5ed26-a82e-4028-b2b7-b7059c931eb9")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:31.325" endtime="20220905 14:27:31.332"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:31.346" level="INFO">${prop_val} = rgba(0, 123, 255, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:31.332" endtime="20220905 14:27:31.346"/>
+</kw>
+<msg timestamp="20220905 14:27:31.347" level="INFO">${actualColor} = rgba(0, 123, 255, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:31.324" endtime="20220905 14:27:31.347"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:31.347" endtime="20220905 14:27:31.347"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.670" endtime="20220905 14:27:31.348"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Removed</arg>
+<arg>expectedColor=rgba(220, 53, 69, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:31.348" level="INFO">${element_xpath} = xpath=//button[text()="Removed"]</msg>
+<status status="PASS" starttime="20220905 14:27:31.348" endtime="20220905 14:27:31.348"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:31.349" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Removed"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:31.349" endtime="20220905 14:27:31.899"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:31.908" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="5ae54259-c49f-4ca5-9094-329f4c11a63a")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:31.900" endtime="20220905 14:27:31.908"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:31.921" level="INFO">${prop_val} = rgba(220, 53, 69, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:31.909" endtime="20220905 14:27:31.921"/>
+</kw>
+<msg timestamp="20220905 14:27:31.921" level="INFO">${actualColor} = rgba(220, 53, 69, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:31.899" endtime="20220905 14:27:31.922"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:31.922" endtime="20220905 14:27:31.923"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.348" endtime="20220905 14:27:31.923"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Zero Width</arg>
+<arg>expectedColor=rgba(255, 193, 7, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:31.924" level="INFO">${element_xpath} = xpath=//button[text()="Zero Width"]</msg>
+<status status="PASS" starttime="20220905 14:27:31.923" endtime="20220905 14:27:31.924"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:31.924" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Zero Width"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:31.924" endtime="20220905 14:27:32.480"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:32.489" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="aa0d6e79-cb11-4096-b2ea-6abd579db34c")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:32.482" endtime="20220905 14:27:32.489"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:32.502" level="INFO">${prop_val} = rgba(255, 193, 7, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:32.490" endtime="20220905 14:27:32.503"/>
+</kw>
+<msg timestamp="20220905 14:27:32.503" level="INFO">${actualColor} = rgba(255, 193, 7, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:32.481" endtime="20220905 14:27:32.503"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:32.503" endtime="20220905 14:27:32.504"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:31.923" endtime="20220905 14:27:32.504"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Overlapped</arg>
+<arg>expectedColor=rgba(40, 167, 69, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:32.505" level="INFO">${element_xpath} = xpath=//button[text()="Overlapped"]</msg>
+<status status="PASS" starttime="20220905 14:27:32.505" endtime="20220905 14:27:32.505"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:32.506" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Overlapped"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:32.506" endtime="20220905 14:27:33.070"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:33.078" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="744aab8e-ad3a-492c-b938-7bf823c71262")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:33.071" endtime="20220905 14:27:33.078"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:33.088" level="INFO">${prop_val} = rgba(40, 167, 69, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:33.078" endtime="20220905 14:27:33.088"/>
+</kw>
+<msg timestamp="20220905 14:27:33.089" level="INFO">${actualColor} = rgba(40, 167, 69, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:33.071" endtime="20220905 14:27:33.089"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:33.089" endtime="20220905 14:27:33.089"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:32.504" endtime="20220905 14:27:33.090"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Opacity 0</arg>
+<arg>expectedColor=rgba(23, 162, 184, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:33.091" level="INFO">${element_xpath} = xpath=//button[text()="Opacity 0"]</msg>
+<status status="PASS" starttime="20220905 14:27:33.090" endtime="20220905 14:27:33.091"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:33.091" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Opacity 0"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:33.091" endtime="20220905 14:27:33.645"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:33.652" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="752220f3-1d3f-4645-92b0-4eed56ecf025")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:33.646" endtime="20220905 14:27:33.652"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:33.665" level="INFO">${prop_val} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:33.653" endtime="20220905 14:27:33.665"/>
+</kw>
+<msg timestamp="20220905 14:27:33.665" level="INFO">${actualColor} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:33.645" endtime="20220905 14:27:33.665"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:33.665" endtime="20220905 14:27:33.666"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:33.090" endtime="20220905 14:27:33.666"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Visibility Hidden</arg>
+<arg>expectedColor=rgba(23, 162, 184, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:33.667" level="INFO">${element_xpath} = xpath=//button[text()="Visibility Hidden"]</msg>
+<status status="PASS" starttime="20220905 14:27:33.666" endtime="20220905 14:27:33.667"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:33.667" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Visibility Hidden"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:33.667" endtime="20220905 14:27:34.226"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:34.233" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="6d6c9ef5-89f0-49cd-a3ca-e7b72e88ba3b")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:34.227" endtime="20220905 14:27:34.233"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:34.243" level="INFO">${prop_val} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:34.233" endtime="20220905 14:27:34.243"/>
+</kw>
+<msg timestamp="20220905 14:27:34.243" level="INFO">${actualColor} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:34.226" endtime="20220905 14:27:34.243"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:34.243" endtime="20220905 14:27:34.244"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:33.666" endtime="20220905 14:27:34.244"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Display None</arg>
+<arg>expectedColor=rgba(23, 162, 184, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:34.245" level="INFO">${element_xpath} = xpath=//button[text()="Display None"]</msg>
+<status status="PASS" starttime="20220905 14:27:34.245" endtime="20220905 14:27:34.246"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:34.246" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Display None"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:34.246" endtime="20220905 14:27:34.794"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:34.803" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="24536181-2af0-4938-b2e0-9d8382637a42")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:34.795" endtime="20220905 14:27:34.803"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:34.815" level="INFO">${prop_val} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:34.803" endtime="20220905 14:27:34.815"/>
+</kw>
+<msg timestamp="20220905 14:27:34.815" level="INFO">${actualColor} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:34.794" endtime="20220905 14:27:34.815"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:34.815" endtime="20220905 14:27:34.816"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:34.244" endtime="20220905 14:27:34.816"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Offscreen</arg>
+<arg>expectedColor=rgba(23, 162, 184, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:34.817" level="INFO">${element_xpath} = xpath=//button[text()="Offscreen"]</msg>
+<status status="PASS" starttime="20220905 14:27:34.817" endtime="20220905 14:27:34.817"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:34.818" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Offscreen"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:34.817" endtime="20220905 14:27:35.362"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:35.370" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="291ede40-e24b-491d-a599-bff3fe17ef7e")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:35.363" endtime="20220905 14:27:35.370"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:35.384" level="INFO">${prop_val} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:35.370" endtime="20220905 14:27:35.384"/>
+</kw>
+<msg timestamp="20220905 14:27:35.384" level="INFO">${actualColor} = rgba(23, 162, 184, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:35.362" endtime="20220905 14:27:35.384"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:35.385" endtime="20220905 14:27:35.385"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:34.816" endtime="20220905 14:27:35.385"/>
+</kw>
+<kw name="When Click on the button" library="ClickActions">
+<arg>buttonName=Hide</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${button_xpath}</var>
+<arg>//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:35.386" level="INFO">${button_xpath} = //button[text()="Hide"]</msg>
+<status status="PASS" starttime="20220905 14:27:35.386" endtime="20220905 14:27:35.386"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${button_xpath}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220905 14:27:35.386" endtime="20220905 14:27:35.413"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${button_xpath}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220905 14:27:35.414" level="INFO">Clicking element '//button[text()="Hide"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:35.413" endtime="20220905 14:27:35.465"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>${button_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:35.466" level="INFO">Simulating Mouse Out on element '//button[text()="Hide"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:35.465" endtime="20220905 14:27:36.005"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:35.386" endtime="20220905 14:27:36.006"/>
+</kw>
+<kw name="Then Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Removed</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.008" endtime="20220905 14:27:36.008"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.007" endtime="20220905 14:27:36.008"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.008" endtime="20220905 14:27:36.008"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.008" endtime="20220905 14:27:36.008"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.009" endtime="20220905 14:27:36.009"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.008" endtime="20220905 14:27:36.009"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.009" endtime="20220905 14:27:36.009"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.009" endtime="20220905 14:27:36.009"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.009" endtime="20220905 14:27:36.010"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.009" endtime="20220905 14:27:36.010"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.010" endtime="20220905 14:27:36.010"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.010" endtime="20220905 14:27:36.010"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.010" endtime="20220905 14:27:36.010"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.010" endtime="20220905 14:27:36.011"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.007" endtime="20220905 14:27:36.011"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.007" endtime="20220905 14:27:36.011"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Zero Width</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.011" endtime="20220905 14:27:36.012"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.011" endtime="20220905 14:27:36.012"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.012" endtime="20220905 14:27:36.012"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.012" endtime="20220905 14:27:36.012"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.012" endtime="20220905 14:27:36.012"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.012" endtime="20220905 14:27:36.012"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.013" endtime="20220905 14:27:36.013"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.013" endtime="20220905 14:27:36.013"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.013" endtime="20220905 14:27:36.013"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.013" endtime="20220905 14:27:36.013"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.014" endtime="20220905 14:27:36.014"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.014" endtime="20220905 14:27:36.014"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.014" endtime="20220905 14:27:36.014"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.014" endtime="20220905 14:27:36.014"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.011" endtime="20220905 14:27:36.014"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.011" endtime="20220905 14:27:36.015"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Overlapped</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.015" endtime="20220905 14:27:36.015"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.015" endtime="20220905 14:27:36.015"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.016" endtime="20220905 14:27:36.016"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.016" endtime="20220905 14:27:36.016"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.016" endtime="20220905 14:27:36.016"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.016" endtime="20220905 14:27:36.016"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.017" endtime="20220905 14:27:36.017"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.017" endtime="20220905 14:27:36.017"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.017" endtime="20220905 14:27:36.017"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.017" endtime="20220905 14:27:36.017"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.018" endtime="20220905 14:27:36.018"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.017" endtime="20220905 14:27:36.018"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.018" endtime="20220905 14:27:36.018"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.018" endtime="20220905 14:27:36.018"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.015" endtime="20220905 14:27:36.018"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.015" endtime="20220905 14:27:36.018"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Opacity 0</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.019" endtime="20220905 14:27:36.019"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.019" endtime="20220905 14:27:36.019"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.020" endtime="20220905 14:27:36.020"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.020" endtime="20220905 14:27:36.020"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.020" endtime="20220905 14:27:36.020"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.020" endtime="20220905 14:27:36.020"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.021" endtime="20220905 14:27:36.021"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.020" endtime="20220905 14:27:36.021"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.021" endtime="20220905 14:27:36.021"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.021" endtime="20220905 14:27:36.021"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.022" endtime="20220905 14:27:36.022"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.021" endtime="20220905 14:27:36.022"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.022" endtime="20220905 14:27:36.022"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.022" endtime="20220905 14:27:36.022"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.019" endtime="20220905 14:27:36.022"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.018" endtime="20220905 14:27:36.022"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Visibility Hidden</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.023" endtime="20220905 14:27:36.023"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.023" endtime="20220905 14:27:36.023"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.024" endtime="20220905 14:27:36.024"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.024" endtime="20220905 14:27:36.024"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.024" endtime="20220905 14:27:36.024"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.024" endtime="20220905 14:27:36.024"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.025" endtime="20220905 14:27:36.025"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.024" endtime="20220905 14:27:36.025"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.025" endtime="20220905 14:27:36.025"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.025" endtime="20220905 14:27:36.025"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.025" endtime="20220905 14:27:36.026"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.025" endtime="20220905 14:27:36.026"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.026" endtime="20220905 14:27:36.026"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.026" endtime="20220905 14:27:36.026"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.023" endtime="20220905 14:27:36.026"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.023" endtime="20220905 14:27:36.026"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Display None</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.027" endtime="20220905 14:27:36.027"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.027" endtime="20220905 14:27:36.027"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.027" endtime="20220905 14:27:36.028"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.027" endtime="20220905 14:27:36.028"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.028" endtime="20220905 14:27:36.028"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.028" endtime="20220905 14:27:36.028"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.028" endtime="20220905 14:27:36.028"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.028" endtime="20220905 14:27:36.029"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.029" endtime="20220905 14:27:36.029"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.029" endtime="20220905 14:27:36.029"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.029" endtime="20220905 14:27:36.029"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.029" endtime="20220905 14:27:36.029"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.030" endtime="20220905 14:27:36.030"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.030" endtime="20220905 14:27:36.030"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.027" endtime="20220905 14:27:36.030"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.026" endtime="20220905 14:27:36.030"/>
+</kw>
+<kw name="And Check a button status after clicking on Hide button" library="VisibilityPage">
+<arg>buttonName=Offscreen</arg>
+<if>
+<branch type="IF" condition="&quot;${button_name}&quot; == &quot;Removed&quot;">
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.031" endtime="20220905 14:27:36.031"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.031" endtime="20220905 14:27:36.031"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Zero Width&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}" and @class="btn btn-warning zerowidth"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.031" endtime="20220905 14:27:36.031"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.031" endtime="20220905 14:27:36.031"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Overlapped&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${buttonName}"]/following-sibling::div[contains(@style,absolute)]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.032" endtime="20220905 14:27:36.032"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.032" endtime="20220905 14:27:36.032"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Opacity 0&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="opacity: 0;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.032" endtime="20220905 14:27:36.032"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.032" endtime="20220905 14:27:36.033"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Visibility Hidden&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="visibility: hidden;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.033" endtime="20220905 14:27:36.033"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.033" endtime="20220905 14:27:36.033"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Display None&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @style="display: none;"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.033" endtime="20220905 14:27:36.033"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.033" endtime="20220905 14:27:36.033"/>
+</branch>
+<branch type="ELSE IF" condition="&quot;${button_name}&quot; == &quot;Offscreen&quot;">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[text()="${button_name}" and @class="btn btn-info offscreen"]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20220905 14:27:36.034" endtime="20220905 14:27:36.034"/>
+</kw>
+<status status="NOT RUN" starttime="20220905 14:27:36.034" endtime="20220905 14:27:36.034"/>
+</branch>
+<status status="PASS" starttime="20220905 14:27:36.031" endtime="20220905 14:27:36.034"/>
+</if>
+<status status="PASS" starttime="20220905 14:27:36.030" endtime="20220905 14:27:36.034"/>
+</kw>
+<kw name="And The button is visible with the expected color" library="ClickActions">
+<arg>buttonName=Hide</arg>
+<arg>expectedColor=rgba(0, 123, 255, 1)</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element_xpath}</var>
+<arg>xpath=//button[text()="${buttonName}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220905 14:27:36.035" level="INFO">${element_xpath} = xpath=//button[text()="Hide"]</msg>
+<status status="PASS" starttime="20220905 14:27:36.035" endtime="20220905 14:27:36.035"/>
+</kw>
+<kw name="Mouse Out" library="SeleniumLibrary">
+<arg>locator=${element_xpath}</arg>
+<doc>Simulates moving the mouse away from the element ``locator``.</doc>
+<msg timestamp="20220905 14:27:36.035" level="INFO">Simulating Mouse Out on element 'xpath=//button[text()="Hide"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:36.035" endtime="20220905 14:27:36.581"/>
+</kw>
+<kw name="Get CSS Property Value" library="Generic">
+<var>${actualColor}</var>
+<arg>${element_xpath}</arg>
+<arg>background-color</arg>
+<doc>Get the CSS property value of an Element.</doc>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${css}</var>
+<arg>locator=${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20220905 14:27:36.591" level="INFO">${css} = &lt;selenium.webdriver.remote.webelement.WebElement (session="830d41478b856bbedc969fc25323a8f4", element="cbb5ed26-a82e-4028-b2b7-b7059c931eb9")&gt;</msg>
+<status status="PASS" starttime="20220905 14:27:36.582" endtime="20220905 14:27:36.591"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<var>${prop_val}</var>
+<arg>${css}</arg>
+<arg>value_of_css_property</arg>
+<arg>${attribute_name}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<msg timestamp="20220905 14:27:36.599" level="INFO">${prop_val} = rgba(0, 123, 255, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:36.591" endtime="20220905 14:27:36.599"/>
+</kw>
+<msg timestamp="20220905 14:27:36.599" level="INFO">${actualColor} = rgba(0, 123, 255, 1)</msg>
+<status status="PASS" starttime="20220905 14:27:36.581" endtime="20220905 14:27:36.600"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${expectedColor}</arg>
+<arg>second=${actualColor}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220905 14:27:36.600" endtime="20220905 14:27:36.601"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:36.034" endtime="20220905 14:27:36.601"/>
+</kw>
+<kw name="Teardowns" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" library="BuiltIn">
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" starttime="20220905 14:27:36.601" endtime="20220905 14:27:36.601"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220905 14:27:36.602" endtime="20220905 14:27:38.754"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:36.601" endtime="20220905 14:27:38.754"/>
+</kw>
+<tag>UI</tag>
+<tag>Visibility</tag>
+<status status="PASS" starttime="20220905 14:27:26.838" endtime="20220905 14:27:38.754"/>
+</test>
+<status status="PASS" starttime="20220905 14:27:26.613" endtime="20220905 14:27:38.755"/>
+</suite>
+<status status="PASS" starttime="20220905 14:27:26.610" endtime="20220905 14:27:38.756"/>
+</suite>
+<status status="PASS" starttime="20220905 14:27:26.594" endtime="20220905 14:27:38.756"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">UI</stat>
+<stat pass="1" fail="0" skip="0">Visibility</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="TestSuites">TestSuites</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="UI Tests">TestSuites.UI Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="TS003 UI Visibility">TestSuites.UI Tests.TS003 UI Visibility</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

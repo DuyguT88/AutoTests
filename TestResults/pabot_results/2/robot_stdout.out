@@ -1,0 +1,50 @@
+==============================================================================
+TestSuites                                                                    
+==============================================================================
+TestSuites.API Tests                                                          
+==============================================================================
+TestSuites.API Tests.TS003 API Store                                          
+==============================================================================
+API_TS003_Test_1: Request an order                                    | PASS |
+------------------------------------------------------------------------------
+API_TS003_Test_2: Get the order from order id                         | PASS |
+------------------------------------------------------------------------------
+ API_TS003_Test_3: Delete the order                                   | PASS |
+------------------------------------------------------------------------------
+API_TS003_Test_4: Get with non-existed orderId (Negative Test)          
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS003_API_Store.robot:31
+    T:  API_TS003_Test_4: Get with non-existed orderId (Negative Test)    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS003_API_Store.robot:32
+      When GET    url=${API_URL}/store/order/${invalid_orderId}    expected_status=400
+      |  url=${API_URL}/store/order/${invalid_orderId} = url=https://petstore.swagger.io/v2/store/order/15 (str)
+______________________________________________________________________________
+| FAIL |
+Url: https://petstore.swagger.io/v2/store/order/15 Expected status: 200 != 400
+------------------------------------------------------------------------------
+API_TS004_Test_5: Add an order with invalid order Id (Negative test)    
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS003_API_Store.robot:36
+    T:  API_TS004_Test_5: Add an order with invalid order Id (Negative test)    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS003_API_Store.robot:38
+      When POST    url=${API_URL}/store/order    json=${add_order}    expected_status=400
+      |  url=${API_URL}/store/order = url=https://petstore.swagger.io/v2/store/order (str)
+      |  json=${add_order} = json={'id': '15', 'petId': 15, 'quantity': 2, 'shipDate': '2022-09-02T15:26:39.934Z', 'status': 'placed', 'complete': True} (str)
+______________________________________________________________________________
+| FAIL |
+Url: https://petstore.swagger.io/v2/store/order Expected status: 200 != 400
+------------------------------------------------------------------------------
+TestSuites.API Tests.TS003 API Store                                  | FAIL |
+5 tests, 3 passed, 2 failed
+==============================================================================
+TestSuites.API Tests                                                  | FAIL |
+5 tests, 3 passed, 2 failed
+==============================================================================
+TestSuites                                                            | FAIL |
+5 tests, 3 passed, 2 failed
+==============================================================================
+Output:  C:\PythonInterviewProject\TestResults\pabot_results\2\output.xml

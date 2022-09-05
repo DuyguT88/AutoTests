@@ -1,0 +1,72 @@
+==============================================================================
+TestSuites                                                                    
+==============================================================================
+TestSuites.API Tests                                                          
+==============================================================================
+TestSuites.API Tests.TS002 API Pet                                            
+==============================================================================
+API_TS002_Test_1: Add a pet                                           | PASS |
+------------------------------------------------------------------------------
+API_TS002_Test_2: Update the pet image                                | PASS |
+------------------------------------------------------------------------------
+API_TS002_Test_3: Get the pet from id                                   
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:29
+    T:  API_TS002_Test_3: Get the pet from id    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:31
+      Then Validate the response schema with reference schema    input=${get_response_body.json()}    ref_path=${GLOBAL_SCHEMA_RESP_GET_PET}
+      |  input=${get_response_body.json()} = <Unable to define variable value>
+      |  ref_path=${GLOBAL_SCHEMA_RESP_GET_PET} = ref_path=C:\PythonInterviewProject\TestData\Variables\..\Schemas\Pet\response_get_pet.json (str)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\Resources\API_Resources\DataChecker.robot:14
+      Should Be Equal As Strings    ${input}    ${ref}
+      |  ${input} = {'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'} (dict)
+      |  ${ref} = {'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//lovely_dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'} (dict)
+______________________________________________________________________________
+| FAIL |
+{'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'} != {'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//lovely_dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'available'}
+------------------------------------------------------------------------------
+API_TS002_Test_4: Delete the pet                                      | PASS |
+------------------------------------------------------------------------------
+API_TS002_Test_6: Add a ped non-invalid keys and values (Negative ...   
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:38
+    T:  API_TS002_Test_6: Add a ped non-invalid keys and values (Negative Test)    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:40
+      When POST    url=${API_URL}/pet    json=${send_body}    expected_status=405
+      |  url=${API_URL}/pet = url=https://petstore.swagger.io/v2/pet (str)
+      |  json=${send_body} = json={'test': 15, 'invalid': 'Hello World'} (str)
+______________________________________________________________________________
+| FAIL |
+Url: https://petstore.swagger.io/v2/pet Expected status: 200 != 405
+------------------------------------------------------------------------------
+API_TS002_Test_7: Get with non-existed pedId (Negative Test)          | PASS |
+------------------------------------------------------------------------------
+API_TS002_Test_8: Not possible to add a pet with undefined status ...   
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:49
+    T:  API_TS002_Test_8: Not possible to add a pet with undefined status different than available,pending,sold (Negative Test)    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\PythonInterviewProject\TestSuites\API_Tests\TS002_API_Pet.robot:51
+      When POST    url=${API_URL}/pet    json=${send_body}    expected_status=405
+      |  url=${API_URL}/pet = url=https://petstore.swagger.io/v2/pet (str)
+      |  json=${send_body} = json={'id': 15, 'category': {'id': 1, 'name': 'dog'}, 'name': 'doggie', 'photoUrls': ['//dog.jpg'], 'tags': [{'id': 0, 'name': 'white'}], 'status': 'unavailable'} (str)
+______________________________________________________________________________
+| FAIL |
+Url: https://petstore.swagger.io/v2/pet Expected status: 200 != 405
+------------------------------------------------------------------------------
+TestSuites.API Tests.TS002 API Pet                                    | FAIL |
+7 tests, 4 passed, 3 failed
+==============================================================================
+TestSuites.API Tests                                                  | FAIL |
+7 tests, 4 passed, 3 failed
+==============================================================================
+TestSuites                                                            | FAIL |
+7 tests, 4 passed, 3 failed
+==============================================================================
+Output:  C:\PythonInterviewProject\TestResults\pabot_results\1\output.xml

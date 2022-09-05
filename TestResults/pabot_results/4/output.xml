@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20220905 14:27:26.579" rpa="false" schemaversion="3">
+<suite id="s1" name="TestSuites" source="C:\PythonInterviewProject\TestSuites">
+<suite id="s1-s1" name="UI Tests" source="C:\PythonInterviewProject\TestSuites\UI_Tests">
+<suite id="s1-s1-s1" name="TS002 UI TextVerify" source="C:\PythonInterviewProject\TestSuites\UI_Tests\TS002_UI_TextVerify.robot">
+<test id="s1-s1-s1-t1" name="UI_TS002_Test_1: Check if 'Welcome UserName!' text field is available" line="13">
+<kw name="Preconditions" type="SETUP">
+<kw name="Open the web page" library="Generic">
+<arg>${WEB_URL}</arg>
+<arg>${BROWSER}</arg>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220905 14:27:26.825" level="INFO">Opening browser 'Chrome' to base url 'http://www.uitestingplayground.com/'.</msg>
+<status status="PASS" starttime="20220905 14:27:26.824" endtime="20220905 14:27:29.841"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20220905 14:27:29.841" endtime="20220905 14:27:30.049"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>text=UI Test Automation Playground</arg>
+<arg>timeout=30s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20220905 14:27:30.049" endtime="20220905 14:27:30.183"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:26.824" endtime="20220905 14:27:30.183"/>
+</kw>
+<kw name="Click on the scenario name" library="MainPage">
+<arg>Verify Text</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[text()="${hyperlink_name}"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220905 14:27:30.186" level="INFO">Clicking element '//a[text()="Verify Text"]'.</msg>
+<status status="PASS" starttime="20220905 14:27:30.185" endtime="20220905 14:27:30.662"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.183" endtime="20220905 14:27:30.662"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:26.823" endtime="20220905 14:27:30.662"/>
+</kw>
+<kw name="Then User see 'Welcome UserName!' text field on the verify test page" library="VerifyTextPage">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>//span[normalize-space(.)='UserName']/parent::span[contains(text(),'Welcome')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20220905 14:27:30.691" level="INFO">Current page contains element '//span[normalize-space(.)='UserName']/parent::span[contains(text(),'Welcome')]'.</msg>
+<status status="PASS" starttime="20220905 14:27:30.664" endtime="20220905 14:27:30.691"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.663" endtime="20220905 14:27:30.691"/>
+</kw>
+<kw name="Teardowns" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" library="BuiltIn">
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" starttime="20220905 14:27:30.693" endtime="20220905 14:27:30.693"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220905 14:27:30.693" endtime="20220905 14:27:32.911"/>
+</kw>
+<status status="PASS" starttime="20220905 14:27:30.692" endtime="20220905 14:27:32.912"/>
+</kw>
+<tag>TextVerify</tag>
+<tag>UI</tag>
+<status status="PASS" starttime="20220905 14:27:26.822" endtime="20220905 14:27:32.912"/>
+</test>
+<status status="PASS" starttime="20220905 14:27:26.609" endtime="20220905 14:27:32.913"/>
+</suite>
+<status status="PASS" starttime="20220905 14:27:26.606" endtime="20220905 14:27:32.914"/>
+</suite>
+<status status="PASS" starttime="20220905 14:27:26.590" endtime="20220905 14:27:32.915"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">TextVerify</stat>
+<stat pass="1" fail="0" skip="0">UI</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="TestSuites">TestSuites</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="UI Tests">TestSuites.UI Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="TS002 UI TextVerify">TestSuites.UI Tests.TS002 UI TextVerify</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

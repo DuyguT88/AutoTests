@@ -1,0 +1,53 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+strategy:
+  matrix:
+    Python310:
+      python.version: '3.10'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+    addToPath: true
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip && pip install -r requirements.txt
+  displayName: 'Install requirements'
+
+- script: |
+    pabot -d ./TestResults -x result.xml ./TestSuites
+  displayName: 'Run Tests'
+
+- script: |
+    curl -X POST -H "x-api-key:Nzk0MDJjMTIyYmRkNGU3N2U4ODhmMmM1NmJiNzY1M2IwYzVhNzRmMWQzYmRhYjk1MWVlYTRmY2YzYjM1NWM0MjRl" -H "Content-Type:multipart/form-data" -F "file[]=@result.xml" "https://app.calliope.pro/api/v2/profile/4454/import"
+  workingDirectory: '$(Pipeline.Workspace)/s/TestResults/'
+  condition: always()
+  continueOnError: true
+  displayName: Publish Test Report to calliope.pro
+
+- task: PublishTestResults@2
+  continueOnError: true
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: '$(Pipeline.Workspace)/s/TestResults/result.xml'
+    mergeTestResults: true
+    publishRunAttachments: true
+    failTaskOnFailedTests: true
+  displayName: 'Create Test Results Chart'
+  
+- task: PublishPipelineArtifact@1
+  continueOnError: true
+  condition: succeededOrFailed()
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/s/TestResults'
+  displayName: 'Publish Test Result Report and Detailed Log'
