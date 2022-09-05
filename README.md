@@ -20,15 +20,18 @@ https://app.calliope.pro/profiles/4454/reports
 d. Describe one improvement point and one new feature for the Calliope.pro platform:
 - Improvements:
   1.The following explanation for robot framework test report generation is not correct in the Calliope.pro documentation.
+
 ""Supported files
 We accept the whole /results/ folder from RobotFramework:
 output.xml
 log.html (optional)
 report.html (optional)""
 
-CHECK THIS::: Since uploading only output.xml or whole folder of results (output.xml,log.html, report.html) 
-result file as zip to Calliope.pro does not create test report in Calliope.pro.
+Uploading only output.xml or
+whole all test results (includes output.xml,log.html, report.html files) result file separately or
+zip format to Calliope.pro does not create test report in Calliope.pro.
 It accepts only XUnit output file to generate test result report for robot framework.
+
   2. It was hard to find "API-key" and "profile-id" values to link and upload test result file to calliope.pro in azure yaml file.
 It should be explicit in the documentation as path base. The added small screenshot without any tab/location info is useless to find them out.
 
