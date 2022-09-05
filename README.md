@@ -1,8 +1,8 @@
-a. How to run the tests locally;
+#a. How to run the tests locally;
 - Go local project directory on the command prompt of your computer and run the following command which runs test suites parallel:
 "pabot -d ./TestResults -x result.xml ./TestSuites"
 
-b. How to run the test in a CI/CD pipeline;
+#b. How to run the test in a CI/CD pipeline;
 - I use AzureDevOps as CI/CD environment and project repository. The tests code is pushed by Git to AzureDevOps git repository:
 https://dev.azure.com/duygulu-05/_git/AutoTestsInterviewProject
 - The Azure pipeline is created and configured for this project as well (./azure-pipelines.yml).
@@ -12,12 +12,12 @@ The project pipelines are in: https://dev.azure.com/duygulu-05/AutoTestsIntervie
 - For each pipeline publish test result report with visual charts and robot test report can be downloaded, 
 since they are configured in ./azure-pipelines.yml file.
 
-c. Has a link to the results in Calliope.pro;
+#c. Has a link to the results in Calliope.pro;
 The generated XUnit output file (result.xml) is imported to Calliope.pro automatically by the every trigger of pipeline, 
 so the auto-created Calliope.pro reports are available now for this project in:
 https://app.calliope.pro/profiles/4454/reports
 
-d. Describe one improvement point and one new feature for the Calliope.pro platform:
+#d. Describe one improvement point and one new feature for the Calliope.pro platform:
 - Improvements:
   1.The following explanation for robot framework test report generation is not correct in the Calliope.pro documentation.
 
@@ -39,10 +39,10 @@ New Feature:
 - Azure Devops which is one of the most common sw development tool, but it is not mentioned in
 Calliope (https://docs.calliope.pro/import/manual-import/). It can be added.
 
-e. What you used to select the scenarios, what was your approach?;
+#e. What you used to select the scenarios, what was your approach?;
 I selected more common scenarios and high risky ones to be able use these software.
 
-f. Why are they the most important;
+#f. Why are they the most important;
 - For UI tests I selected more common scenarios and high risky ones.
 If clicking, the text and visibility of the page do not work, you can not use this web application. 
 - For API tests, again I selected more common scenarios and high risky ones.
@@ -53,7 +53,7 @@ in the API documentation. Because, protecting user's data is important for the c
 - I also added the negative tests, since the application should work consistently and handle invalid or non-existed data request 
 properly.
 
-g. What could be the next steps to your project;
+#g. What could be the next steps to your project;
 - For UI tests; I would add negative tests and prioritize other UI scenarios to automate. 
 - I would consider more on negative tests and non-automated endpoints in API documentation with considering risk assessment 
 for the priority.
